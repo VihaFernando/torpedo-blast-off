@@ -51,6 +51,7 @@ const NAV_ITEMS = [
 function Landing() {
   return (
     <div id="home" className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+      <GrungeFilter />
       <Navbar />
       <Hero />
       <FeatureStrip />
@@ -64,6 +65,21 @@ function Landing() {
     </div>
   );
 }
+
+function GrungeFilter() {
+  return (
+    <svg width="0" height="0" className="absolute" aria-hidden="true" style={{ position: "absolute" }}>
+      <defs>
+        <filter id="grunge-distress" x="-2%" y="-2%" width="104%" height="104%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" result="displaced" />
+          <feComposite in="displaced" in2="noise" operator="out" />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
+
 
 /* ---------------- NAV ---------------- */
 function Navbar() {
