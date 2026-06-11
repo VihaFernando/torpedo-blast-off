@@ -44,8 +44,8 @@ const NAV_ITEMS = [
   { label: "Menu", href: "#menu" },
   { label: "Special Blends", href: "#blends" },
   { label: "Fire It Up", href: "#fire" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Locations", href: "#contact" },
+  { label: "About Us", href: "#about" },
 ];
 
 function Landing() {
@@ -53,7 +53,6 @@ function Landing() {
     <div id="home" className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
       <Navbar />
       <Hero />
-      <FeatureStrip />
       <SignatureMenu />
       <FireItUp />
       <SpecialBlends />
@@ -77,7 +76,7 @@ function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "glass-dark py-3" : "py-5 bg-linear-to-b from-black/60 to-transparent"
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "glass-dark py-3" : "py-5 bg-linear-to-b from-black/80 to-transparent"
         }`}
     >
       <div className="mx-auto max-w-7xl px-5 lg:px-10 flex items-center justify-between gap-6">
@@ -85,28 +84,27 @@ function Navbar() {
           <img
             src={logoImage}
             alt="Torpedo"
-            className="h-11 md:h-14 w-auto object-contain"
+            className="h-10 md:h-12 w-auto object-contain"
             decoding="async"
           />
         </a>
         <nav className="hidden lg:flex items-center gap-9">
-          {NAV_ITEMS.slice(1, -1).map((n) => (
+          {NAV_ITEMS.slice(1).map((n) => (
             <a
               key={n.label}
               href={n.href}
-              className="text-xs font-semibold tracking-[0.18em] uppercase text-white/85 hover:text-white transition relative group"
+              className="text-xs font-bold tracking-[0.2em] uppercase text-white hover:text-[#ff3b14] transition relative group"
             >
               {n.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ff3b14] transition-all group-hover:w-full" />
             </a>
           ))}
         </nav>
         <div className="flex items-center gap-3">
           <a
             href="#menu"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[#ff3b14]/80 px-5 py-2.5 text-xs font-bold tracking-[0.18em] uppercase text-white hover:bg-[#ff3b14] transition-all hover:glow-flame"
+            className="hidden sm:inline-flex items-center gap-2 rounded-md border border-[#ff3b14] px-6 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-white hover:bg-[#ff3b14] transition-all"
           >
-            Order Now <Flame className="w-3.5 h-3.5" />
+            Order Now <Flame className="w-4 h-4 text-[#ff3b14] group-hover:text-white" />
           </a>
           <button
             onClick={() => setOpen((v) => !v)}
@@ -140,28 +138,28 @@ function Navbar() {
 }
 
 /* ---------------- HERO ---------------- */
-function Embers({ count = 28 }: { count?: number }) {
+function Embers({ count = 40 }: { count?: number }) {
   const items = Array.from({ length: count });
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       {items.map((_, i) => {
         const left = Math.random() * 100;
-        const size = 2 + Math.random() * 3;
-        const dur = 6 + Math.random() * 10;
-        const delay = -Math.random() * 14;
-        const drift = (Math.random() - 0.5) * 120;
+        const size = 1 + Math.random() * 2;
+        const dur = 4 + Math.random() * 6;
+        const delay = -Math.random() * 10;
+        const drift = (Math.random() - 0.5) * 150;
         return (
           <span
             key={i}
             style={{
               left: `${left}%`,
-              bottom: -10,
+              bottom: -20,
               width: size,
               height: size,
               animation: `ember-rise ${dur}s linear ${delay}s infinite`,
               ["--drift" as string]: `${drift}px`,
               background: `radial-gradient(circle, #ff9a3c, #ff3b14 60%, transparent 70%)`,
-              boxShadow: "0 0 8px rgba(255,106,0,0.8)",
+              boxShadow: "0 0 4px rgba(255,106,0,0.9)",
             }}
             className="absolute rounded-full"
           />
@@ -174,22 +172,24 @@ function Embers({ count = 28 }: { count?: number }) {
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative min-h-screen w-full overflow-hidden">
+    <section ref={ref} className="relative min-h-screen w-full overflow-hidden flex flex-col">
       {/* background */}
       <motion.div style={{ y }} className="absolute inset-0">
-        <div
-          className="absolute inset-0 bg-cover bg-right bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: "right center" }}
+        <img
+          src={heroImage}
+          alt=""
           aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-[88%_center] sm:object-[84%_center] md:object-[76%_center] lg:object-[82%_center]"
+          decoding="async"
         />
-        {/* dark overlays to keep left side readable */}
-        <div className="absolute inset-0 bg-linear-to-r from-black via-black/85 to-transparent md:via-black/60 md:to-transparent" />
-        <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/60" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(255,59,20,0.18),transparent_60%)]" />
+        {/* dark overlays for readability */}
+        <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(255,59,20,0.12),transparent_70%)]" />
       </motion.div>
 
       <Embers />
@@ -197,58 +197,57 @@ function Hero() {
       {/* content */}
       <motion.div
         style={{ opacity }}
-        className="relative z-10 min-h-screen flex items-end md:items-center pt-28 md:pt-24 pb-32 md:pb-40 px-5 lg:px-10"
+        className="relative z-10 flex-1 flex items-center pt-24 pb-12 px-5 lg:px-10"
       >
         <div className="mx-auto max-w-7xl w-full grid md:grid-cols-2">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="max-w-xl"
+            className="flex flex-col items-start"
           >
-            <h1 className="font-display text-distressed text-white leading-[0.85] tracking-tight text-[15vw] sm:text-[12vw] md:text-[7.5vw] lg:text-[7rem]">
-              ONE BITE
-              <br />
-              AND{" "}
-              <span className="text-[#ff3b14] text-distressed">YOU KNOW</span>
+            <h1 className="font-display text-white leading-[0.78] tracking-tight text-[17vw] sm:text-[15vw] md:text-[8.5rem] lg:text-[10rem] uppercase">
+              <span className="text-distressed block">ONE BITE</span>
+              <span className="text-distressed block">AND <span className="text-[#ff3b14]">YOU KNOW</span></span>
             </h1>
 
-            <div className="mt-6 inline-block relative">
-              <span className="brush-stroke inline-block px-6 py-2.5 font-display tracking-[0.15em] text-white text-lg sm:text-xl italic">
+            <div className="mt-6 flex flex-col items-start gap-5">
+              <div className="brush-stroke px-8 py-3 font-display tracking-[0.1em] text-white text-xl sm:text-2xl uppercase italic">
                 FLAVOR EXPLOSIONS DAILY
-              </span>
+              </div>
+
+              <div className="flex items-center gap-3 text-[10px] sm:text-xs font-bold tracking-[0.3em] uppercase text-white pl-1">
+                <span>Burgers</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
+                <span>Fries</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
+                <span>Shakes</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
+                <span>Kaboom</span>
+              </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-3 text-sm font-bold tracking-[0.25em] uppercase text-white/90">
-              <span>Burgers</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
-              <span>Fries</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
-              <span>Shakes</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
-              <span>Kaboom</span>
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-wrap gap-4">
               <a
                 href="#menu"
-                className="group inline-flex items-center gap-3 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-7 py-4 rounded-md font-bold tracking-[0.18em] text-xs uppercase transition-all hover:glow-flame"
+                className="inline-flex items-center gap-2.5 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-8 py-3.5 rounded-md font-bold tracking-[0.2em] text-[11px] uppercase transition-all shadow-[0_0_20px_rgba(255,59,20,0.3)]"
               >
-                <Flame className="w-4 h-4" /> View Menu
+                <Flame className="w-4 h-4 fill-current" /> VIEW MENU
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-3 glass-dark border border-white/15 hover:border-white/40 text-white px-7 py-4 rounded-md font-bold tracking-[0.18em] text-xs uppercase transition-all"
+                className="inline-flex items-center gap-2.5 border border-white/30 hover:border-white text-white px-8 py-3.5 rounded-md font-bold tracking-[0.2em] text-[11px] uppercase transition-all"
               >
-                <MapPin className="w-4 h-4" /> Find Us
+                <MapPin className="w-4 h-4" /> FIND US
               </a>
             </div>
           </motion.div>
+          <div className="hidden md:block" /> {/* space for the background burger */}
         </div>
       </motion.div>
 
       {/* feature strip overlay */}
-      <div className="absolute bottom-0 inset-x-0 z-10">
+      <div className="relative z-10 w-full">
         <FeatureBar />
       </div>
     </section>
@@ -264,16 +263,16 @@ const FEATURES = [
 
 function FeatureBar() {
   return (
-    <div className="glass-dark border-t border-white/10">
+    <div className="glass-dark border-y border-white/5">
       <div className="mx-auto max-w-7xl px-5 lg:px-10 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
         {FEATURES.map((f, i) => (
-          <div key={i} className="flex items-center gap-3 py-4 md:py-5 px-3 md:px-6">
-            <f.icon className="w-6 h-6 md:w-7 md:h-7 text-[#ff6a00] shrink-0" />
+          <div key={i} className="flex items-center gap-4 py-6 px-4 md:px-8">
+            <f.icon className="w-8 h-8 text-white/80 shrink-0 stroke-[1.5]" />
             <div className="min-w-0">
-              <div className="font-bold uppercase tracking-[0.15em] text-[11px] md:text-xs text-white truncate">
+              <div className="font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs text-white truncate">
                 {f.title}
               </div>
-              <div className="text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-white/55 truncate">
+              <div className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/40 truncate mt-1">
                 {f.desc}
               </div>
             </div>
@@ -283,6 +282,7 @@ function FeatureBar() {
     </div>
   );
 }
+
 
 function FeatureStrip() {
   return <div className="h-4 bg-black" />;
