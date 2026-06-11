@@ -76,27 +76,9 @@
 }
 
 @utility text-distressed {
-  -webkit-mask-image:
-    radial-gradient(circle at 18% 22%, transparent 1.2px, #000 2px),
-    radial-gradient(circle at 68% 58%, transparent 1.4px, #000 2px),
-    radial-gradient(circle at 38% 78%, transparent 1.1px, #000 2px),
-    radial-gradient(circle at 88% 12%, transparent 1.3px, #000 2px),
-    radial-gradient(circle at 8% 65%, transparent 1px, #000 1.8px),
-    radial-gradient(circle at 52% 35%, transparent 0.9px, #000 1.6px),
-    radial-gradient(circle at 78% 88%, transparent 1.1px, #000 1.9px);
-  mask-image:
-    radial-gradient(circle at 18% 22%, transparent 1.2px, #000 2px),
-    radial-gradient(circle at 68% 58%, transparent 1.4px, #000 2px),
-    radial-gradient(circle at 38% 78%, transparent 1.1px, #000 2px),
-    radial-gradient(circle at 88% 12%, transparent 1.3px, #000 2px),
-    radial-gradient(circle at 8% 65%, transparent 1px, #000 1.8px),
-    radial-gradient(circle at 52% 35%, transparent 0.9px, #000 1.6px),
-    radial-gradient(circle at 78% 88%, transparent 1.1px, #000 1.9px);
-  -webkit-mask-size: 5px 5px, 9px 9px, 11px 11px, 7px 7px, 6px 6px, 4px 4px, 8px 8px;
-  mask-size: 5px 5px, 9px 9px, 11px 11px, 7px 7px, 6px 6px, 4px 4px, 8px 8px;
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
+  filter: url(#grunge-distress);
 }
+
 
 
 
