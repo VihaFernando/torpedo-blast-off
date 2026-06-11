@@ -220,10 +220,10 @@ function Hero() {
             className="max-w-[640px]"
           >
             <h1 className="font-display leading-[0.88] tracking-tight text-[16vw] sm:text-[14vw] md:text-[10vw] lg:text-[8.5rem] xl:text-[9.5rem]">
-              <span className="text-distressed text-white block">ONE BITE</span>
+              <span className="text-distressed-white block">ONE BITE</span>
               <span className="block">
-                <span className="text-distressed text-white">AND </span>
-                <span className="text-distressed text-[#ff3b14]">YOU KNOW</span>
+                <span className="text-distressed-white">AND </span>
+                <span className="text-distressed-red">YOU KNOW</span>
               </span>
             </h1>
 
