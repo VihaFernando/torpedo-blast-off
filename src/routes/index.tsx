@@ -51,7 +51,6 @@ const NAV_ITEMS = [
 function Landing() {
   return (
     <div id="home" className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
-      <GrungeFilter />
       <Navbar />
       <Hero />
       <FeatureStrip />
@@ -65,21 +64,6 @@ function Landing() {
     </div>
   );
 }
-
-function GrungeFilter() {
-  return (
-    <svg width="0" height="0" className="absolute" aria-hidden="true" style={{ position: "absolute" }}>
-      <defs>
-        <filter id="grunge-distress" x="-2%" y="-2%" width="104%" height="104%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" result="displaced" />
-          <feComposite in="displaced" in2="noise" operator="out" />
-        </filter>
-      </defs>
-    </svg>
-  );
-}
-
 
 /* ---------------- NAV ---------------- */
 function Navbar() {
@@ -210,42 +194,29 @@ function Hero() {
       {/* content */}
       <motion.div
         style={{ opacity }}
-        className="relative z-10 min-h-screen flex items-start pt-28 md:pt-32 pb-32 md:pb-40 px-5 lg:px-10"
+        className="relative z-10 min-h-screen flex items-end md:items-center pt-28 md:pt-24 pb-32 md:pb-40 px-5 lg:px-10"
       >
-        <div className="mx-auto max-w-7xl w-full">
+        <div className="mx-auto max-w-7xl w-full grid md:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="max-w-[640px]"
+            className="max-w-xl"
           >
-            <h1 className="font-display leading-[0.88] tracking-tight text-[16vw] sm:text-[14vw] md:text-[10vw] lg:text-[8.5rem] xl:text-[9.5rem]">
-              <span className="text-distressed-white block">ONE BITE</span>
-              <span className="block">
-                <span className="text-distressed-white">AND </span>
-                <span className="text-distressed-red">YOU KNOW</span>
-              </span>
+            <h1 className="font-display text-distressed text-white leading-[0.85] tracking-tight text-[15vw] sm:text-[12vw] md:text-[7.5vw] lg:text-[7rem]">
+              ONE BITE
+              <br />
+              AND{" "}
+              <span className="text-[#ff3b14] text-distressed">YOU KNOW</span>
             </h1>
 
-            <div className="mt-7 inline-block relative">
-              <svg
-                className="absolute inset-0 w-full h-full"
-                viewBox="0 0 400 60"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M6,18 C 60,8 180,4 260,10 C 320,14 370,16 394,22 L 396,46 C 340,52 220,55 140,52 C 80,50 30,48 4,42 Z"
-                  fill="#ff3b14"
-                />
-                <path d="M2,22 L 10,18 L 6,24 Z M396,28 L 388,32 L 394,26 Z M398,38 L 392,42 L 396,36 Z" fill="#ff3b14" opacity="0.85" />
-              </svg>
-              <span className="relative inline-block px-7 py-2.5 font-display tracking-[0.12em] text-white text-xl sm:text-2xl italic skew-x-[-4deg]">
+            <div className="mt-6 inline-block relative">
+              <span className="brush-stroke inline-block px-6 py-2.5 font-display tracking-[0.15em] text-white text-lg sm:text-xl italic">
                 FLAVOR EXPLOSIONS DAILY
               </span>
             </div>
 
-            <div className="mt-7 flex items-center gap-3 text-sm font-extrabold tracking-[0.28em] uppercase text-white">
+            <div className="mt-6 flex items-center gap-3 text-sm font-bold tracking-[0.25em] uppercase text-white/90">
               <span>Burgers</span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
               <span>Fries</span>
@@ -255,14 +226,13 @@ function Hero() {
               <span>Kaboom</span>
             </div>
 
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-4">
               <a
                 href="#menu"
-                className="group inline-flex items-center gap-3 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-8 py-4 rounded-md font-extrabold tracking-[0.2em] text-xs uppercase transition-all hover:glow-flame"
+                className="group inline-flex items-center gap-3 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-7 py-4 rounded-md font-bold tracking-[0.18em] text-xs uppercase transition-all hover:glow-flame"
               >
-                <Flame className="w-4 h-4 fill-current" /> View Menu
+                <Flame className="w-4 h-4" /> View Menu
               </a>
-
               <a
                 href="#contact"
                 className="inline-flex items-center gap-3 glass-dark border border-white/15 hover:border-white/40 text-white px-7 py-4 rounded-md font-bold tracking-[0.18em] text-xs uppercase transition-all"
