@@ -2,6 +2,22 @@
 @source "../src";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Headliner No. 45";
+  src: url("./assets/fonts/HeadlinerNo.45 DEMO.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Capture it";
+  src: url("./assets/fonts/Capture it.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -30,8 +46,8 @@
   --color-ring: var(--ring);
   --color-flame: var(--flame);
   --color-ember: var(--ember);
-  --font-display: "Bebas Neue", "Anton", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-display: "Capture it", "Headliner No. 45", sans-serif;
+  --font-body: "Poppins", sans-serif;
 }
 
 :root {
@@ -60,8 +76,12 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html, body {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
     background-color: #0a0a0a;
     color: var(--color-foreground);
     font-family: var(--font-body);
@@ -76,20 +96,20 @@
 
 @utility text-distressed {
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(0,0,0,0.45) 1px, transparent 2px),
-    radial-gradient(circle at 70% 60%, rgba(0,0,0,0.4) 1px, transparent 2px),
-    radial-gradient(circle at 40% 80%, rgba(0,0,0,0.5) 1px, transparent 2px),
-    radial-gradient(circle at 85% 15%, rgba(0,0,0,0.4) 1px, transparent 2px);
+    radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.45) 1px, transparent 2px),
+    radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.4) 1px, transparent 2px),
+    radial-gradient(circle at 40% 80%, rgba(0, 0, 0, 0.5) 1px, transparent 2px),
+    radial-gradient(circle at 85% 15%, rgba(0, 0, 0, 0.4) 1px, transparent 2px);
   background-size: 7px 7px, 11px 11px, 13px 13px, 9px 9px;
   -webkit-background-clip: text;
   background-clip: text;
 }
 
 @utility glass-dark {
-  background: linear-gradient(180deg, rgba(20,20,20,0.55), rgba(10,10,10,0.75));
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.55), rgba(10, 10, 10, 0.75));
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 @utility brush-stroke {
@@ -98,19 +118,45 @@
 }
 
 @utility glow-flame {
-  box-shadow: 0 0 0 1px rgba(255,59,20,0.4), 0 10px 40px -10px rgba(255,59,20,0.6), 0 0 60px -20px rgba(255,106,0,0.5);
+  box-shadow: 0 0 0 1px rgba(255, 59, 20, 0.4), 0 10px 40px -10px rgba(255, 59, 20, 0.6), 0 0 60px -20px rgba(255, 106, 0, 0.5);
 }
 
 @keyframes ember-rise {
-  0% { transform: translateY(0) translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  100% { transform: translateY(-100vh) translateX(var(--drift, 20px)); opacity: 0; }
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100vh) translateX(var(--drift, 20px));
+    opacity: 0;
+  }
 }
+
 @keyframes smoke-drift {
-  0% { transform: translateY(0) scale(1); opacity: 0.5; }
-  100% { transform: translateY(-200px) scale(1.6); opacity: 0; }
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(-200px) scale(1.6);
+    opacity: 0;
+  }
 }
+
 @keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
 }

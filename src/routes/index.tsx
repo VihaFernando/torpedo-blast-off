@@ -19,8 +19,8 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
-import heroAsset from "@/assets/hero.png.asset.json";
-import logoAsset from "@/assets/logo.png.asset.json";
+import heroImage from "@/assets/hero.png";
+import logoImage from "@/assets/logo.png";
 import menuChicken from "@/assets/menu-chicken.jpg";
 import menuBeef from "@/assets/menu-beef.jpg";
 import menuShake from "@/assets/menu-shake.jpg";
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Bold burgers, loaded fries, and special blends. One bite and you know. Torpedo — Sri Lanka's flavor explosion." },
       { property: "og:title", content: "Torpedo — Flavor Explosions Daily" },
       { property: "og:description", content: "Bold burgers, loaded fries, and special blends. One bite and you know." },
-      { property: "og:image", content: heroAsset.url },
+      { property: "og:image", content: heroImage },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -77,13 +77,17 @@ function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "glass-dark py-3" : "py-5 bg-gradient-to-b from-black/60 to-transparent"
-      }`}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "glass-dark py-3" : "py-5 bg-linear-to-b from-black/60 to-transparent"
+        }`}
     >
       <div className="mx-auto max-w-7xl px-5 lg:px-10 flex items-center justify-between gap-6">
         <a href="#home" className="shrink-0">
-          <img src={logoAsset.url} alt="Torpedo" className="h-10 md:h-12 w-auto drop-shadow-[0_4px_20px_rgba(255,59,20,0.6)]" />
+          <img
+            src={logoImage}
+            alt="Torpedo"
+            className="h-11 md:h-14 w-auto object-contain"
+            decoding="async"
+          />
         </a>
         <nav className="hidden lg:flex items-center gap-9">
           {NAV_ITEMS.slice(1, -1).map((n) => (
@@ -93,7 +97,7 @@ function Navbar() {
               className="text-xs font-semibold tracking-[0.18em] uppercase text-white/85 hover:text-white transition relative group"
             >
               {n.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#ff3b14] transition-all group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ff3b14] transition-all group-hover:w-full" />
             </a>
           ))}
         </nav>
@@ -177,15 +181,14 @@ function Hero() {
     <section ref={ref} className="relative min-h-screen w-full overflow-hidden">
       {/* background */}
       <motion.div style={{ y }} className="absolute inset-0">
-        <img
-          src={heroAsset.url}
-          alt="Torpedo signature burgers with city skyline and fire embers"
-          className="w-full h-full object-cover object-right"
-          fetchPriority="high"
+        <div
+          className="absolute inset-0 bg-cover bg-right bg-no-repeat"
+          style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: "right center" }}
+          aria-hidden="true"
         />
         {/* dark overlays to keep left side readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent md:via-black/60 md:to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-linear-to-r from-black via-black/85 to-transparent md:via-black/60 md:to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/60" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(255,59,20,0.18),transparent_60%)]" />
       </motion.div>
 
@@ -310,7 +313,7 @@ function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
 
 function SignatureMenu() {
   return (
-    <section id="menu" className="relative py-24 md:py-32 px-5 lg:px-10 bg-gradient-to-b from-black via-[#0d0606] to-black">
+    <section id="menu" className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0d0606] to-black">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,59,20,0.15),transparent_60%)]" />
       <div className="relative mx-auto max-w-7xl">
         <SectionTitle kicker="The Lineup" title="SIGNATURE TORPEDOS" />
@@ -324,14 +327,14 @@ function SignatureMenu() {
               transition={{ duration: 0.6, delay: i * 0.06 }}
               className="group relative rounded-2xl overflow-hidden glass-dark hover:border-[#ff3b14]/50 transition-all hover:-translate-y-1 hover:glow-flame"
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-4/3 overflow-hidden">
                 <img
                   src={item.img}
                   alt={item.name}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent" />
                 {item.tag && (
                   <span className="absolute top-4 left-4 bg-[#ff3b14] text-white text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">
                     {item.tag}
@@ -389,9 +392,8 @@ function FireItUp() {
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 whileHover={{ y: -6 }}
-                className={`relative text-left rounded-2xl p-8 border transition-all glass-dark ${
-                  isActive ? "border-[#ff3b14] glow-flame" : "border-white/10 hover:border-white/30"
-                }`}
+                className={`relative text-left rounded-2xl p-8 border transition-all glass-dark ${isActive ? "border-[#ff3b14] glow-flame" : "border-white/10 hover:border-white/30"
+                  }`}
               >
                 <div className="flex items-center gap-1.5 mb-6">
                   {Array.from({ length: 3 }).map((_, fi) => (
@@ -438,7 +440,7 @@ const BLENDS = [
 
 function SpecialBlends() {
   return (
-    <section id="blends" className="relative py-24 md:py-32 px-5 lg:px-10 bg-gradient-to-b from-black via-[#0a0506] to-black overflow-hidden">
+    <section id="blends" className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0a0506] to-black overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(255,106,0,0.18),transparent_60%)]" />
       <div className="relative mx-auto max-w-7xl">
         <SectionTitle kicker="Drinks That Hit Different" title="SPECIAL BLENDS" />
@@ -452,14 +454,14 @@ function SpecialBlends() {
               transition={{ duration: 0.6, delay: i * 0.08 }}
               className="group relative rounded-2xl overflow-hidden glass-dark border-white/10 hover:border-[#ff6a00]/50 transition-all hover:-translate-y-2"
             >
-              <div className="relative aspect-[3/4] overflow-hidden bg-black">
+              <div className="relative aspect-3/4 overflow-hidden bg-black">
                 <img
                   src={menuShake}
                   alt={b.name}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-[radial-gradient(circle_at_50%_30%,rgba(255,106,0,0.35),transparent_60%)]" />
               </div>
               <div className="p-5">
@@ -489,7 +491,7 @@ function AboutTimeline() {
       <div className="relative mx-auto max-w-7xl">
         <SectionTitle kicker="The Story" title="WHAT HAPPENS WHEN FLAVOR GOES BOOM?" />
         <div className="relative">
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#ff3b14]/40 to-transparent" />
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-[#ff3b14]/40 to-transparent" />
           <div className="space-y-12 md:space-y-20">
             {STEPS.map((s, i) => {
               const right = i % 2 === 1;
@@ -500,9 +502,8 @@ function AboutTimeline() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.6 }}
-                  className={`relative md:grid md:grid-cols-2 md:gap-12 items-center ${
-                    right ? "" : ""
-                  }`}
+                  className={`relative md:grid md:grid-cols-2 md:gap-12 items-center ${right ? "" : ""
+                    }`}
                 >
                   <div className={`pl-16 md:pl-0 ${right ? "md:order-2 md:pl-16" : "md:text-right md:pr-16"}`}>
                     <div className="font-display text-7xl md:text-8xl text-[#ff3b14]/30 leading-none mb-2">
@@ -535,7 +536,7 @@ function SocialWall() {
     { img: menuShake, likes: "4.9K", caption: "Shakaboom o'clock." },
   ];
   return (
-    <section className="relative py-24 md:py-32 px-5 lg:px-10 bg-gradient-to-b from-black via-[#0a0606] to-black">
+    <section className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0a0606] to-black">
       <div className="relative mx-auto max-w-7xl">
         <SectionTitle kicker="@torpedo.lk" title="FROM THE FEED" />
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
@@ -550,7 +551,7 @@ function SocialWall() {
               className="group relative aspect-square rounded-xl overflow-hidden glass-dark"
             >
               <img src={t.img} alt={t.caption} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent opacity-0 group-hover:opacity-100 transition flex flex-col justify-end p-4">
+              <div className="absolute inset-0 bg-linear-to-t from-black via-transparent opacity-0 group-hover:opacity-100 transition flex flex-col justify-end p-4">
                 <div className="flex items-center gap-2 text-[#ff6a00] text-xs font-bold mb-1">
                   <Instagram className="w-4 h-4" /> {t.likes}
                 </div>
@@ -571,7 +572,7 @@ function LocationSection() {
       <div className="mx-auto max-w-7xl">
         <SectionTitle kicker="Visit The Drop Zone" title="FIND A TORPEDO" />
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-10">
-          <div className="relative aspect-[4/3] lg:aspect-auto rounded-2xl overflow-hidden glass-dark border-white/10">
+          <div className="relative aspect-4/3 lg:aspect-auto rounded-2xl overflow-hidden glass-dark border-white/10">
             <iframe
               title="Torpedo location"
               src="https://www.google.com/maps?q=Colombo,Sri+Lanka&output=embed"
@@ -618,11 +619,11 @@ function InfoRow({ icon: Icon, label, value }: { icon: typeof MapPin; label: str
 /* ---------------- FOOTER ---------------- */
 function Footer() {
   return (
-    <footer className="relative pt-20 pb-10 px-5 lg:px-10 bg-gradient-to-b from-black to-[#1a0606] border-t border-white/5">
+    <footer className="relative pt-20 pb-10 px-5 lg:px-10 bg-linear-to-b from-black to-[#1a0606] border-t border-white/5">
       <div className="mx-auto max-w-7xl">
         <div className="grid md:grid-cols-4 gap-10 mb-14">
           <div className="md:col-span-2">
-            <img src={logoAsset.url} alt="Torpedo" className="h-16 w-auto mb-5 drop-shadow-[0_4px_24px_rgba(255,59,20,0.6)]" />
+            <img src={logoImage} alt="Torpedo" className="h-16 w-auto object-contain mb-5" decoding="async" />
             <p className="text-white/60 max-w-md leading-relaxed">
               Flavor explosions daily. Bold burgers, loaded fries, special blends — crafted to wreck your expectations of fast food.
             </p>
