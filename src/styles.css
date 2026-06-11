@@ -76,22 +76,28 @@
 }
 
 @utility text-distressed {
-  position: relative;
-  background-image:
-    radial-gradient(circle at 18% 22%, rgba(0,0,0,0.85) 1.2px, transparent 2px),
-    radial-gradient(circle at 68% 58%, rgba(0,0,0,0.7) 1.4px, transparent 2px),
-    radial-gradient(circle at 38% 78%, rgba(0,0,0,0.8) 1.1px, transparent 2px),
-    radial-gradient(circle at 88% 12%, rgba(0,0,0,0.65) 1.3px, transparent 2px),
-    radial-gradient(circle at 8% 65%, rgba(0,0,0,0.7) 1px, transparent 1.8px),
-    radial-gradient(circle at 52% 35%, rgba(0,0,0,0.6) 0.9px, transparent 1.6px);
-  background-size: 5px 5px, 9px 9px, 11px 11px, 7px 7px, 6px 6px, 4px 4px;
-  background-blend-mode: multiply;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  background-color: currentColor;
-  filter: contrast(1.05);
+  -webkit-mask-image:
+    radial-gradient(circle at 18% 22%, transparent 1.2px, #000 2px),
+    radial-gradient(circle at 68% 58%, transparent 1.4px, #000 2px),
+    radial-gradient(circle at 38% 78%, transparent 1.1px, #000 2px),
+    radial-gradient(circle at 88% 12%, transparent 1.3px, #000 2px),
+    radial-gradient(circle at 8% 65%, transparent 1px, #000 1.8px),
+    radial-gradient(circle at 52% 35%, transparent 0.9px, #000 1.6px),
+    radial-gradient(circle at 78% 88%, transparent 1.1px, #000 1.9px);
+  mask-image:
+    radial-gradient(circle at 18% 22%, transparent 1.2px, #000 2px),
+    radial-gradient(circle at 68% 58%, transparent 1.4px, #000 2px),
+    radial-gradient(circle at 38% 78%, transparent 1.1px, #000 2px),
+    radial-gradient(circle at 88% 12%, transparent 1.3px, #000 2px),
+    radial-gradient(circle at 8% 65%, transparent 1px, #000 1.8px),
+    radial-gradient(circle at 52% 35%, transparent 0.9px, #000 1.6px),
+    radial-gradient(circle at 78% 88%, transparent 1.1px, #000 1.9px);
+  -webkit-mask-size: 5px 5px, 9px 9px, 11px 11px, 7px 7px, 6px 6px, 4px 4px, 8px 8px;
+  mask-size: 5px 5px, 9px 9px, 11px 11px, 7px 7px, 6px 6px, 4px 4px, 8px 8px;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
+
 
 
 @utility glass-dark {
