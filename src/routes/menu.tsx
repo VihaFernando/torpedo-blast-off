@@ -8,8 +8,6 @@ import {
   MapPin,
   Instagram,
   Facebook,
-  Youtube,
-  Twitter,
   Star,
   ShoppingBag,
   UtensilsCrossed,
@@ -42,10 +40,9 @@ export const Route = createFileRoute("/menu")({
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Menu", href: "/menu" },
-  { label: "Special Blends", href: "/#blends" },
-  { label: "Fire It Up", href: "/#fire" },
+  { label: "Special Offers", href: "/#blends" },
+  { label: "Gallery", href: "/#gallery" },
   { label: "Locations", href: "/#contact" },
-  { label: "About Us", href: "/#about" },
 ];
 
 function Navbar() {
@@ -497,13 +494,24 @@ function MenuFooter() {
               your expectations of fast food.
             </p>
             <div className="flex items-center gap-3 mt-6">
-              {[Instagram, Facebook, Youtube, Twitter].map((I, i) => (
+              {[
+                {
+                  Icon: Instagram,
+                  href: "https://www.instagram.com/torpedohq?igsh=MWdocWRvMWx1NjVxcg==",
+                },
+                {
+                  Icon: Facebook,
+                  href: "https://www.facebook.com/p/Torpedo-HQ-61580067237198/",
+                },
+              ].map(({ Icon, href }, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="grid place-items-center w-10 h-10 rounded-full border border-white/15 hover:border-[#ff3b14] hover:bg-[#ff3b14]/10 hover:text-[#ff6a00] text-white transition"
                 >
-                  <I className="w-4 h-4" />
+                  <Icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
@@ -539,9 +547,23 @@ function MenuFooter() {
               Get In Touch
             </div>
             <ul className="space-y-2.5 text-sm text-white/75">
-              <li>42 Galle Road, Colombo 03</li>
-              <li>+94 11 234 5678</li>
-              <li>hello@torpedo.lk</li>
+              <li>66, Vauxhall Street, Colombo 2, Colombo 00200</li>
+              <li>0777 121 575</li>
+              <li>
+                <a href="mailto:torpedohq@gmail.com" className="hover:text-[#ff6a00] transition">
+                  torpedohq@gmail.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.ubereats.com/lk/store/torpedo-colombo-02/TyW_YSSYWYC8CElCqSwXyw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#ff6a00] transition"
+                >
+                  Order on Uber Eats
+                </a>
+              </li>
             </ul>
             <div className="mt-5 flex items-center gap-1 text-[#ff6a00] text-xs font-bold tracking-[0.2em] uppercase">
               {Array.from({ length: 5 }).map((_, i) => (

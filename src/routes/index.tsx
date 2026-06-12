@@ -8,8 +8,6 @@ import {
   X,
   Instagram,
   Facebook,
-  Youtube,
-  Twitter,
   Phone,
   Clock,
   Navigation,
@@ -20,7 +18,18 @@ import heroImage from "@/assets/hero.png";
 import logoImage from "@/assets/logo.png";
 import menuChicken from "@/assets/menu-chicken.jpg";
 import menuBeef from "@/assets/menu-beef.jpg";
-import menuShake from "@/assets/menu-shake.jpg";
+
+import special1 from "@/assets/special1.png";
+import special2 from "@/assets/special2.png";
+import special3 from "@/assets/special3.png";
+import g1 from "@/assets/photos/g1.png";
+import g2 from "@/assets/photos/g2.png";
+import g3 from "@/assets/photos/g3.png";
+import g4 from "@/assets/photos/g4.png";
+import g5 from "@/assets/photos/g5.webp";
+import g6 from "@/assets/photos/g6.webp";
+import g7 from "@/assets/photos/g7.webp";
+import g8 from "@/assets/photos/g8.webp";
 import flavorExplosionsImg from "@/assets/flavor-explosions.png";
 import burgerIcon from "@/assets/burger.png";
 import fireIcon from "@/assets/fire.png";
@@ -50,10 +59,9 @@ export const Route = createFileRoute("/")({
 const NAV_ITEMS = [
   { label: "Home", href: "#home", to: undefined },
   { label: "Menu", href: undefined, to: "/menu" as const },
-  { label: "Special Blends", href: "#blends", to: undefined },
-  { label: "Fire It Up", href: "#fire", to: undefined },
+  { label: "Special Offers", href: "#blends", to: undefined },
+  { label: "Gallery", href: "#gallery", to: undefined },
   { label: "Locations", href: "#contact", to: undefined },
-  { label: "About Us", href: "#about", to: undefined },
 ];
 
 function Landing() {
@@ -62,9 +70,9 @@ function Landing() {
       <Navbar />
       <Hero />
       {/* <SignatureMenu /> */}
-      <FireItUp />
-      {/* <SpecialBlends /> 
-      <AboutTimeline /> */}
+      {/* <FireItUp /> */}
+      <SpecialBlends />
+      {/* <AboutTimeline /> */}
       <SocialWall />
       <LocationSection />
       <Footer />
@@ -207,7 +215,9 @@ function Hero() {
             className="flex flex-col items-start"
           >
             <h1 className="font-display text-white leading-[0.88] tracking-normal uppercase">
-              <span className="block whitespace-nowrap text-[clamp(3rem,16vw,10rem)]">ONE BITE</span>
+              <span className="block whitespace-nowrap text-[clamp(3rem,16vw,10rem)]">
+                ONE BITE
+              </span>
               <span className="block whitespace-nowrap text-[clamp(2rem,10vw,6rem)]">
                 AND <span className="text-[#ff3b14]">YOU KNOW</span>
               </span>
@@ -476,12 +486,11 @@ function FireItUp() {
   );
 }
 
-/* ---------------- SPECIAL BLENDS ---------------- */
-const BLENDS = [
-  { name: "Iced Milo", desc: "Chocolate-malt classic, blasted with ice.", price: "LKR 590" },
-  { name: "Kick Shake", desc: "Espresso meets caramel. Pure energy.", price: "LKR 690" },
-  { name: "Jam & Berry", desc: "Mixed berries swirled with vanilla cream.", price: "LKR 690" },
-  { name: "Shakaboom", desc: "Brownie chunks, fudge, whipped chaos.", price: "LKR 790" },
+/* ---------------- SPECIAL OFFERS ---------------- */
+const OFFERS = [
+  { img: special1, alt: "Special Offer 1" },
+  { img: special2, alt: "Special Offer 2" },
+  { img: special3, alt: "Special Offer 3" },
 ];
 
 function SpecialBlends() {
@@ -492,32 +501,23 @@ function SpecialBlends() {
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(255,106,0,0.18),transparent_60%)]" />
       <div className="relative mx-auto max-w-7xl">
-        <SectionTitle kicker="Drinks That Hit Different" title="SPECIAL BLENDS" />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {BLENDS.map((b, i) => (
+        <SectionTitle kicker="Limited Time" title="SPECIAL OFFERS" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {OFFERS.map((offer, i) => (
             <motion.div
-              key={b.name}
+              key={i}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="group relative rounded-2xl overflow-hidden glass-dark border-white/10 hover:border-[#ff6a00]/50 transition-all hover:-translate-y-2"
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="relative rounded-2xl overflow-hidden border border-[#ff3b14]/40 hover:border-[#ff3b14] transition-all duration-300 hover:shadow-[0_0_0_1px_rgba(255,59,20,0.3),0_8px_32px_rgba(255,59,20,0.3)]"
             >
-              <div className="relative aspect-3/4 overflow-hidden bg-black">
-                <img
-                  src={menuShake}
-                  alt={b.name}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-2"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-[radial-gradient(circle_at_50%_30%,rgba(255,106,0,0.35),transparent_60%)]" />
-              </div>
-              <div className="p-5">
-                <h3 className="font-display text-2xl tracking-wide text-white mb-1">{b.name}</h3>
-                <p className="text-xs text-white/60 leading-relaxed mb-3">{b.desc}</p>
-                <div className="text-[#ff6a00] font-bold text-sm">{b.price}</div>
-              </div>
+              <img
+                src={offer.img}
+                alt={offer.alt}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
           ))}
         </div>
@@ -592,24 +592,23 @@ function AboutTimeline() {
 }
 
 /* ---------------- SOCIAL WALL ---------------- */
+const GALLERY = [g1, g2, g3, g4, g5, g6, g7, g8];
+
 function SocialWall() {
-  const tiles = [
-    { img: menuChicken, likes: "12.4K", caption: "Crispy. Loaded. Reloaded." },
-    { img: menuBeef, likes: "9.8K", caption: "Double-stack Wednesday." },
-    { img: menuShake, likes: "7.1K", caption: "Sweet relief from the heat." },
-    { img: menuBeef, likes: "15.2K", caption: "When flavor goes boom." },
-    { img: menuChicken, likes: "6.6K", caption: "Hot honey hits different." },
-    { img: menuShake, likes: "4.9K", caption: "Shakaboom o'clock." },
-  ];
   return (
-    <section className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0a0606] to-black">
+    <section
+      id="gallery"
+      className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0a0606] to-black"
+    >
       <div className="relative mx-auto max-w-7xl">
         <SectionTitle kicker="@torpedo.lk" title="FROM THE FEED" />
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
-          {tiles.map((t, i) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {GALLERY.map((img, i) => (
             <motion.a
               key={i}
-              href="#"
+              href="https://www.instagram.com/torpedohq?igsh=MWdocWRvMWx1NjVxcg=="
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -617,16 +616,15 @@ function SocialWall() {
               className="group relative aspect-square rounded-xl overflow-hidden glass-dark"
             >
               <img
-                src={t.img}
-                alt={t.caption}
+                src={img}
+                alt={`Torpedo feed ${i + 1}`}
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black via-transparent opacity-0 group-hover:opacity-100 transition flex flex-col justify-end p-4">
-                <div className="flex items-center gap-2 text-[#ff6a00] text-xs font-bold mb-1">
-                  <Instagram className="w-4 h-4" /> {t.likes}
+                <div className="flex items-center gap-2 text-[#ff6a00] text-xs font-bold">
+                  <Instagram className="w-4 h-4" /> @torpedohq
                 </div>
-                <div className="text-sm text-white font-semibold">{t.caption}</div>
               </div>
             </motion.a>
           ))}
@@ -646,31 +644,39 @@ function LocationSection() {
           <div className="relative aspect-4/3 lg:aspect-auto rounded-2xl overflow-hidden glass-dark border-white/10">
             <iframe
               title="Torpedo location"
-              src="https://www.google.com/maps?q=Colombo,Sri+Lanka&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.7285764430126!2d79.85144317598706!3d6.923014518389752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae259954f751df3%3A0x2df4975fc7d10d86!2sTorpedo!5e0!3m2!1sen!2slk!4v1781243690475!5m2!1sen!2slk"
               className="w-full h-full grayscale contrast-125 opacity-85"
               loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
             />
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(255,59,20,0.15))]" />
           </div>
           <div className="glass-dark rounded-2xl p-8 md:p-10 border-white/10">
             <div className="space-y-6">
-              <InfoRow icon={MapPin} label="Address" value="42 Galle Road, Colombo 03, Sri Lanka" />
+              <InfoRow
+                icon={MapPin}
+                label="Address"
+                value="Torpedo, 66, Vauxhall Street, Colombo 2, Colombo 00200"
+              />
               <InfoRow
                 icon={Clock}
                 label="Opening Hours"
                 value={"Mon–Thu  11:00 — 23:00\nFri–Sun  11:00 — 01:00"}
               />
-              <InfoRow icon={Phone} label="Contact" value="+94 11 234 5678" />
+              <InfoRow icon={Phone} label="Contact" value="0777 121 575" />
             </div>
             <div className="mt-10 flex flex-wrap gap-3">
               <a
-                href="#"
+                href="https://maps.app.goo.gl/torpedo-colombo"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-6 py-3.5 rounded-md font-bold text-xs uppercase tracking-[0.18em] transition hover:glow-flame"
               >
                 <Navigation className="w-4 h-4" /> Get Directions
               </a>
               <a
-                href="#menu"
+                href="menu"
                 className="inline-flex items-center gap-2 border border-white/20 hover:border-white/50 text-white px-6 py-3.5 rounded-md font-bold text-xs uppercase tracking-[0.18em] transition"
               >
                 <Flame className="w-4 h-4" /> Order Now
@@ -725,13 +731,24 @@ function Footer() {
               your expectations of fast food.
             </p>
             <div className="flex items-center gap-3 mt-6">
-              {[Instagram, Facebook, Youtube, Twitter].map((I, i) => (
+              {[
+                {
+                  Icon: Instagram,
+                  href: "https://www.instagram.com/torpedohq?igsh=MWdocWRvMWx1NjVxcg==",
+                },
+                {
+                  Icon: Facebook,
+                  href: "https://www.facebook.com/p/Torpedo-HQ-61580067237198/",
+                },
+              ].map(({ Icon, href }, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="grid place-items-center w-10 h-10 rounded-full border border-white/15 hover:border-[#ff3b14] hover:bg-[#ff3b14]/10 hover:text-[#ff6a00] text-white transition"
                 >
-                  <I className="w-4 h-4" />
+                  <Icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
@@ -767,9 +784,23 @@ function Footer() {
               Get In Touch
             </div>
             <ul className="space-y-2.5 text-sm text-white/75">
-              <li>42 Galle Road, Colombo 03</li>
-              <li>+94 11 234 5678</li>
-              <li>hello@torpedo.lk</li>
+              <li>66, Vauxhall Street, Colombo 2, Colombo 00200</li>
+              <li>0777 121 575</li>
+              <li>
+                <a href="mailto:torpedohq@gmail.com" className="hover:text-[#ff6a00] transition">
+                  torpedohq@gmail.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.ubereats.com/lk/store/torpedo-colombo-02/TyW_YSSYWYC8CElCqSwXyw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#ff6a00] transition"
+                >
+                  Order on Uber Eats
+                </a>
+              </li>
             </ul>
             <div className="mt-5 flex items-center gap-1 text-[#ff6a00] text-xs font-bold tracking-[0.2em] uppercase">
               {Array.from({ length: 5 }).map((_, i) => (
