@@ -4,9 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import {
   Flame,
   MapPin,
-  Sparkles,
-  CupSoda,
-  Beef,
   Menu as MenuIcon,
   X,
   Instagram,
@@ -24,14 +21,25 @@ import logoImage from "@/assets/logo.png";
 import menuChicken from "@/assets/menu-chicken.jpg";
 import menuBeef from "@/assets/menu-beef.jpg";
 import menuShake from "@/assets/menu-shake.jpg";
+import flavorExplosionsImg from "@/assets/flavor-explosions.png";
+import burgerIcon from "@/assets/burger.png";
+import fireIcon from "@/assets/fire.png";
+import starIcon from "@/assets/star.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Torpedo — Flavor Explosions Daily" },
-      { name: "description", content: "Bold burgers, loaded fries, and special blends. One bite and you know. Torpedo — Sri Lanka's flavor explosion." },
+      {
+        name: "description",
+        content:
+          "Bold burgers, loaded fries, and special blends. One bite and you know. Torpedo — Sri Lanka's flavor explosion.",
+      },
       { property: "og:title", content: "Torpedo — Flavor Explosions Daily" },
-      { property: "og:description", content: "Bold burgers, loaded fries, and special blends. One bite and you know." },
+      {
+        property: "og:description",
+        content: "Bold burgers, loaded fries, and special blends. One bite and you know.",
+      },
       { property: "og:image", content: heroImage },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -76,8 +84,9 @@ function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "glass-dark py-3" : "py-5 bg-linear-to-b from-black/80 to-transparent"
-        }`}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        scrolled ? "glass-dark py-3" : "py-5 bg-linear-to-b from-black/80 to-transparent"
+      }`}
     >
       <div className="mx-auto max-w-7xl px-5 lg:px-10 flex items-center justify-between gap-6">
         <a href="#home" className="shrink-0">
@@ -93,7 +102,7 @@ function Navbar() {
             <a
               key={n.label}
               href={n.href}
-              className="text-xs font-bold tracking-[0.2em] uppercase text-white hover:text-[#ff3b14] transition relative group"
+              className="text-sm font-bold tracking-widest uppercase text-white hover:text-[#ff3b14] transition relative group"
             >
               {n.label}
             </a>
@@ -102,7 +111,7 @@ function Navbar() {
         <div className="flex items-center gap-3">
           <a
             href="#menu"
-            className="hidden sm:inline-flex items-center gap-2 rounded-md border border-[#ff3b14] px-6 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-white hover:bg-[#ff3b14] transition-all"
+            className="hidden sm:inline-flex items-center gap-2 rounded-md border border-[#ff3b14] px-6 py-2.5 text-sm font-bold tracking-[0.05em] uppercase text-white hover:bg-[#ff3b14] transition-all"
           >
             Order Now <Flame className="w-4 h-4 text-[#ff3b14] group-hover:text-white" />
           </a>
@@ -138,36 +147,6 @@ function Navbar() {
 }
 
 /* ---------------- HERO ---------------- */
-function Embers({ count = 40 }: { count?: number }) {
-  const items = Array.from({ length: count });
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {items.map((_, i) => {
-        const left = Math.random() * 100;
-        const size = 1 + Math.random() * 2;
-        const dur = 4 + Math.random() * 6;
-        const delay = -Math.random() * 10;
-        const drift = (Math.random() - 0.5) * 150;
-        return (
-          <span
-            key={i}
-            style={{
-              left: `${left}%`,
-              bottom: -20,
-              width: size,
-              height: size,
-              animation: `ember-rise ${dur}s linear ${delay}s infinite`,
-              ["--drift" as string]: `${drift}px`,
-              background: `radial-gradient(circle, #ff9a3c, #ff3b14 60%, transparent 70%)`,
-              boxShadow: "0 0 4px rgba(255,106,0,0.9)",
-            }}
-            className="absolute rounded-full"
-          />
-        );
-      })}
-    </div>
-  );
-}
 
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -186,63 +165,61 @@ function Hero() {
           className="absolute inset-0 h-full w-full object-cover object-[88%_center] sm:object-[84%_center] md:object-[76%_center] lg:object-[82%_center]"
           decoding="async"
         />
-        {/* dark overlays for readability */}
-        <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/20" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(255,59,20,0.12),transparent_70%)]" />
       </motion.div>
-
-      <Embers />
 
       {/* content */}
       <motion.div
         style={{ opacity }}
         className="relative z-10 flex-1 flex items-center pt-24 pb-12 px-5 lg:px-10"
       >
-        <div className="mx-auto max-w-7xl w-full grid md:grid-cols-2">
+        <div className="mx-auto max-w-7xl w-full grid lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
             className="flex flex-col items-start"
           >
-            <h1 className="font-display text-white leading-[0.78] tracking-tight text-[17vw] sm:text-[15vw] md:text-[8.5rem] lg:text-[10rem] uppercase">
-              <span className="text-distressed block">ONE BITE</span>
-              <span className="text-distressed block">AND <span className="text-[#ff3b14]">YOU KNOW</span></span>
+            <h1 className="font-display text-white leading-[0.88] tracking-normal uppercase">
+              <span className="block whitespace-nowrap text-[clamp(3rem,16vw,10rem)]">ONE BITE</span>
+              <span className="block whitespace-nowrap text-[clamp(2rem,10vw,6rem)]">
+                AND <span className="text-[#ff3b14]">YOU KNOW</span>
+              </span>
             </h1>
 
             <div className="mt-6 flex flex-col items-start gap-5">
-              <div className="brush-stroke px-8 py-3 font-display tracking-[0.1em] text-white text-xl sm:text-2xl uppercase italic">
-                FLAVOR EXPLOSIONS DAILY
-              </div>
+              <img
+                src={flavorExplosionsImg}
+                alt="Flavor Explosions Daily"
+                className="h-14 sm:h-18 lg:h-25 w-auto object-contain"
+              />
 
-              <div className="flex items-center gap-3 text-[10px] sm:text-xs font-bold tracking-[0.3em] uppercase text-white pl-1">
+              <div className="flex items-center gap-3 sm:gap-5 text-sm sm:text-base font-semibold tracking-normal uppercase text-white">
                 <span>Burgers</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
+                <span className="w-[5px] h-[5px] rounded-full bg-[#ff3b14] shrink-0" />
                 <span>Fries</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
+                <span className="w-[5px] h-[5px] rounded-full bg-[#ff3b14] shrink-0" />
                 <span>Shakes</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b14]" />
+                <span className="w-[5px] h-[5px] rounded-full bg-[#ff3b14] shrink-0" />
                 <span>Kaboom</span>
               </div>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8 sm:mt-10 flex flex-wrap gap-3 sm:gap-4">
               <a
                 href="#menu"
-                className="inline-flex items-center gap-2.5 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-8 py-3.5 rounded-md font-bold tracking-[0.2em] text-[11px] uppercase transition-all shadow-[0_0_20px_rgba(255,59,20,0.3)]"
+                className="inline-flex items-center gap-2 sm:gap-2.5 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-5 py-2 sm:px-8 sm:py-3.5 rounded-md font-semibold tracking-wider text-xs sm:text-sm uppercase transition-all shadow-[0_0_20px_rgba(255,59,20,0.3)]"
               >
-                <Flame className="w-4 h-4 fill-current" /> VIEW MENU
+                <Flame className="w-3 h-3 sm:w-4 sm:h-4 fill-current" /> VIEW MENU
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2.5 border border-white/30 hover:border-white text-white px-8 py-3.5 rounded-md font-bold tracking-[0.2em] text-[11px] uppercase transition-all"
+                className="inline-flex items-center gap-2 sm:gap-2.5 bg-black border border-white/30 hover:border-white text-white px-5 py-2 sm:px-8 sm:py-3.5 rounded-md font-semibold tracking-widest text-xs sm:text-sm uppercase transition-all"
               >
-                <MapPin className="w-4 h-4" /> FIND US
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4" /> FIND US
               </a>
             </div>
           </motion.div>
-          <div className="hidden md:block" /> {/* space for the background burger */}
+          <div className="hidden lg:block" /> {/* space for the background burger */}
         </div>
       </motion.div>
 
@@ -255,24 +232,29 @@ function Hero() {
 }
 
 const FEATURES = [
-  { icon: Flame, title: "Fire It Up", desc: "Choose your heat" },
-  { icon: Beef, title: "Massive Portions", desc: "Made to satisfy" },
-  { icon: Sparkles, title: "Flavor Explosions", desc: "Bold. Smoky. Loaded." },
-  { icon: CupSoda, title: "Special Blends", desc: "Shakes that hit different" },
+  { icon: fireIcon, title: "Fire It Up", desc: "Choose your heat" },
+  { icon: burgerIcon, title: "Massive Portions", desc: "Made to satisfy" },
+  { icon: starIcon, title: "Flavor Explosions", desc: "Bold. Smoky. Loaded." },
+  { icon: burgerIcon, title: "Special Blends", desc: "Shakes that hit different" },
 ];
 
 function FeatureBar() {
   return (
     <div className="glass-dark border-y border-white/5">
-      <div className="mx-auto max-w-7xl px-5 lg:px-10 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
+      <div className="mx-auto max-w-7xl px-5 lg:px-10 grid grid-cols-2 sm:grid-cols-4 [&>*]:border-r [&>*]:border-white/5 [&>*:nth-child(2)]:border-r-0 sm:[&>*:nth-child(2)]:border-r [&>*:nth-child(3)]:border-t sm:[&>*:nth-child(3)]:border-t-0 [&>*:nth-child(4)]:border-t [&>*:nth-child(4)]:border-r-0 sm:[&>*:nth-child(4)]:border-t-0 sm:[&>*:nth-child(4)]:border-r-0 [&>*:last-child]:border-r-0">
         {FEATURES.map((f, i) => (
-          <div key={i} className="flex items-center gap-4 py-6 px-4 md:px-8">
-            <f.icon className="w-8 h-8 text-white/80 shrink-0 stroke-[1.5]" />
-            <div className="min-w-0">
-              <div className="font-bold uppercase tracking-[0.2em] text-[11px] md:text-xs text-white truncate">
+          <div key={i} className="flex items-center gap-3 py-5 px-4 sm:px-5 md:px-8">
+            <img
+              src={f.icon}
+              alt=""
+              aria-hidden="true"
+              className="w-6 h-6 sm:w-8 sm:h-8 object-contain shrink-0"
+            />
+            <div>
+              <div className="uppercase tracking-[0.08em] text-[11px] sm:text-xs md:text-[13px] text-white leading-tight">
                 {f.title}
               </div>
-              <div className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/40 truncate mt-1">
+              <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-white/40 mt-0.5 hidden sm:block">
                 {f.desc}
               </div>
             </div>
@@ -283,26 +265,59 @@ function FeatureBar() {
   );
 }
 
-
 function FeatureStrip() {
   return <div className="h-4 bg-black" />;
 }
 
 /* ---------------- SIGNATURE MENU ---------------- */
 const MENU = [
-  { name: "Chicken Torpedo", desc: "Crispy chicken, melted cheddar, signature smoky sauce.", price: "LKR 1,490", img: menuChicken, tag: "Bestseller" },
-  { name: "Torpedo Royale", desc: "Double stack. Triple cheese. Caramelized onions.", price: "LKR 1,990", img: menuBeef, tag: "New" },
-  { name: "Beef Torpedo", desc: "Slow-smoked beef, gooey cheese, toasted brioche.", price: "LKR 1,790", img: menuBeef },
-  { name: "Chicken Burger", desc: "Buttermilk fried chicken, slaw, hot honey drizzle.", price: "LKR 1,190", img: menuChicken },
-  { name: "Beef Burger", desc: "Smashed Angus patty, American cheese, pickles.", price: "LKR 1,390", img: menuBeef },
-  { name: "Burger Royale", desc: "Quad-stack chaos. Built for the brave.", price: "LKR 2,290", img: menuBeef, tag: "Hot" },
+  {
+    name: "Chicken Torpedo",
+    desc: "Crispy chicken, melted cheddar, signature smoky sauce.",
+    price: "LKR 1,490",
+    img: menuChicken,
+    tag: "Bestseller",
+  },
+  {
+    name: "Torpedo Royale",
+    desc: "Double stack. Triple cheese. Caramelized onions.",
+    price: "LKR 1,990",
+    img: menuBeef,
+    tag: "New",
+  },
+  {
+    name: "Beef Torpedo",
+    desc: "Slow-smoked beef, gooey cheese, toasted brioche.",
+    price: "LKR 1,790",
+    img: menuBeef,
+  },
+  {
+    name: "Chicken Burger",
+    desc: "Buttermilk fried chicken, slaw, hot honey drizzle.",
+    price: "LKR 1,190",
+    img: menuChicken,
+  },
+  {
+    name: "Beef Burger",
+    desc: "Smashed Angus patty, American cheese, pickles.",
+    price: "LKR 1,390",
+    img: menuBeef,
+  },
+  {
+    name: "Burger Royale",
+    desc: "Quad-stack chaos. Built for the brave.",
+    price: "LKR 2,290",
+    img: menuBeef,
+    tag: "Hot",
+  },
 ];
 
 function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
   return (
     <div className="text-center mb-14 md:mb-20">
       <div className="inline-flex items-center gap-2 text-[#ff6a00] tracking-[0.3em] text-xs font-bold uppercase mb-4">
-        <span className="h-px w-8 bg-[#ff6a00]" /> {kicker} <span className="h-px w-8 bg-[#ff6a00]" />
+        <span className="h-px w-8 bg-[#ff6a00]" /> {kicker}{" "}
+        <span className="h-px w-8 bg-[#ff6a00]" />
       </div>
       <h2 className="font-display text-distressed text-white leading-[0.9] text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
         {title}
@@ -313,7 +328,10 @@ function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
 
 function SignatureMenu() {
   return (
-    <section id="menu" className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0d0606] to-black">
+    <section
+      id="menu"
+      className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0d0606] to-black"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,59,20,0.15),transparent_60%)]" />
       <div className="relative mx-auto max-w-7xl">
         <SectionTitle kicker="The Lineup" title="SIGNATURE TORPEDOS" />
@@ -380,7 +398,6 @@ function FireItUp() {
           background: `radial-gradient(ellipse at 50% 40%, ${SPICE[active].color}30, transparent 60%), #060000`,
         }}
       />
-      <Embers count={active === 2 ? 40 : active === 1 ? 22 : 10} />
       <div className="relative mx-auto max-w-7xl">
         <SectionTitle kicker="Choose Your Heat" title="FIRE IT UP" />
         <div className="grid md:grid-cols-3 gap-5 md:gap-7">
@@ -392,8 +409,9 @@ function FireItUp() {
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 whileHover={{ y: -6 }}
-                className={`relative text-left rounded-2xl p-8 border transition-all glass-dark ${isActive ? "border-[#ff3b14] glow-flame" : "border-white/10 hover:border-white/30"
-                  }`}
+                className={`relative text-left rounded-2xl p-8 border transition-all glass-dark ${
+                  isActive ? "border-[#ff3b14] glow-flame" : "border-white/10 hover:border-white/30"
+                }`}
               >
                 <div className="flex items-center gap-1.5 mb-6">
                   {Array.from({ length: 3 }).map((_, fi) => (
@@ -402,7 +420,8 @@ function FireItUp() {
                       className="w-6 h-6 transition-all"
                       style={{
                         color: fi < s.flames ? s.color : "rgba(255,255,255,0.15)",
-                        filter: fi < s.flames && isActive ? `drop-shadow(0 0 8px ${s.color})` : "none",
+                        filter:
+                          fi < s.flames && isActive ? `drop-shadow(0 0 8px ${s.color})` : "none",
                       }}
                     />
                   ))}
@@ -440,7 +459,10 @@ const BLENDS = [
 
 function SpecialBlends() {
   return (
-    <section id="blends" className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0a0506] to-black overflow-hidden">
+    <section
+      id="blends"
+      className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0a0506] to-black overflow-hidden"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(255,106,0,0.18),transparent_60%)]" />
       <div className="relative mx-auto max-w-7xl">
         <SectionTitle kicker="Drinks That Hit Different" title="SPECIAL BLENDS" />
@@ -479,10 +501,22 @@ function SpecialBlends() {
 
 /* ---------------- ABOUT TIMELINE ---------------- */
 const STEPS = [
-  { n: "01", title: "Fresh Ingredients", desc: "Locally sourced, never frozen. Real flavor starts here." },
-  { n: "02", title: "Crafted Daily", desc: "Every patty, sauce, and bun made the same morning you eat it." },
+  {
+    n: "01",
+    title: "Fresh Ingredients",
+    desc: "Locally sourced, never frozen. Real flavor starts here.",
+  },
+  {
+    n: "02",
+    title: "Crafted Daily",
+    desc: "Every patty, sauce, and bun made the same morning you eat it.",
+  },
   { n: "03", title: "Fire It Up", desc: "Open flame, real smoke, signature char on every bite." },
-  { n: "04", title: "Flavor Explosion", desc: "Bold. Loaded. Engineered to wreck your expectations." },
+  {
+    n: "04",
+    title: "Flavor Explosion",
+    desc: "Bold. Loaded. Engineered to wreck your expectations.",
+  },
 ];
 
 function AboutTimeline() {
@@ -502,10 +536,13 @@ function AboutTimeline() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.6 }}
-                  className={`relative md:grid md:grid-cols-2 md:gap-12 items-center ${right ? "" : ""
-                    }`}
+                  className={`relative md:grid md:grid-cols-2 md:gap-12 items-center ${
+                    right ? "" : ""
+                  }`}
                 >
-                  <div className={`pl-16 md:pl-0 ${right ? "md:order-2 md:pl-16" : "md:text-right md:pr-16"}`}>
+                  <div
+                    className={`pl-16 md:pl-0 ${right ? "md:order-2 md:pl-16" : "md:text-right md:pr-16"}`}
+                  >
                     <div className="font-display text-7xl md:text-8xl text-[#ff3b14]/30 leading-none mb-2">
                       {s.n}
                     </div>
@@ -514,7 +551,9 @@ function AboutTimeline() {
                     </h3>
                     <p className="text-white/65 max-w-md md:inline-block">{s.desc}</p>
                   </div>
-                  <div className={`absolute left-6 md:left-1/2 top-4 -translate-x-1/2 w-5 h-5 rounded-full bg-[#ff3b14] glow-flame ring-4 ring-black`} />
+                  <div
+                    className={`absolute left-6 md:left-1/2 top-4 -translate-x-1/2 w-5 h-5 rounded-full bg-[#ff3b14] glow-flame ring-4 ring-black`}
+                  />
                 </motion.div>
               );
             })}
@@ -550,7 +589,12 @@ function SocialWall() {
               transition={{ duration: 0.5, delay: i * 0.05 }}
               className="group relative aspect-square rounded-xl overflow-hidden glass-dark"
             >
-              <img src={t.img} alt={t.caption} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img
+                src={t.img}
+                alt={t.caption}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
               <div className="absolute inset-0 bg-linear-to-t from-black via-transparent opacity-0 group-hover:opacity-100 transition flex flex-col justify-end p-4">
                 <div className="flex items-center gap-2 text-[#ff6a00] text-xs font-bold mb-1">
                   <Instagram className="w-4 h-4" /> {t.likes}
@@ -584,14 +628,24 @@ function LocationSection() {
           <div className="glass-dark rounded-2xl p-8 md:p-10 border-white/10">
             <div className="space-y-6">
               <InfoRow icon={MapPin} label="Address" value="42 Galle Road, Colombo 03, Sri Lanka" />
-              <InfoRow icon={Clock} label="Opening Hours" value={"Mon–Thu  11:00 — 23:00\nFri–Sun  11:00 — 01:00"} />
+              <InfoRow
+                icon={Clock}
+                label="Opening Hours"
+                value={"Mon–Thu  11:00 — 23:00\nFri–Sun  11:00 — 01:00"}
+              />
               <InfoRow icon={Phone} label="Contact" value="+94 11 234 5678" />
             </div>
             <div className="mt-10 flex flex-wrap gap-3">
-              <a href="#" className="inline-flex items-center gap-2 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-6 py-3.5 rounded-md font-bold text-xs uppercase tracking-[0.18em] transition hover:glow-flame">
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-6 py-3.5 rounded-md font-bold text-xs uppercase tracking-[0.18em] transition hover:glow-flame"
+              >
                 <Navigation className="w-4 h-4" /> Get Directions
               </a>
-              <a href="#menu" className="inline-flex items-center gap-2 border border-white/20 hover:border-white/50 text-white px-6 py-3.5 rounded-md font-bold text-xs uppercase tracking-[0.18em] transition">
+              <a
+                href="#menu"
+                className="inline-flex items-center gap-2 border border-white/20 hover:border-white/50 text-white px-6 py-3.5 rounded-md font-bold text-xs uppercase tracking-[0.18em] transition"
+              >
                 <Flame className="w-4 h-4" /> Order Now
               </a>
             </div>
@@ -602,14 +656,24 @@ function LocationSection() {
   );
 }
 
-function InfoRow({ icon: Icon, label, value }: { icon: typeof MapPin; label: string; value: string }) {
+function InfoRow({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: typeof MapPin;
+  label: string;
+  value: string;
+}) {
   return (
     <div className="flex items-start gap-4">
       <div className="shrink-0 grid place-items-center w-11 h-11 rounded-full bg-[#ff3b14]/15 text-[#ff6a00] border border-[#ff3b14]/30">
         <Icon className="w-5 h-5" />
       </div>
       <div className="min-w-0">
-        <div className="text-[11px] font-bold tracking-[0.22em] uppercase text-white/55 mb-1">{label}</div>
+        <div className="text-[11px] font-bold tracking-[0.22em] uppercase text-white/55 mb-1">
+          {label}
+        </div>
         <div className="text-white font-medium whitespace-pre-line">{value}</div>
       </div>
     </div>
@@ -623,38 +687,61 @@ function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid md:grid-cols-4 gap-10 mb-14">
           <div className="md:col-span-2">
-            <img src={logoImage} alt="Torpedo" className="h-16 w-auto object-contain mb-5" decoding="async" />
+            <img
+              src={logoImage}
+              alt="Torpedo"
+              className="h-16 w-auto object-contain mb-5"
+              decoding="async"
+            />
             <p className="text-white/60 max-w-md leading-relaxed">
-              Flavor explosions daily. Bold burgers, loaded fries, special blends — crafted to wreck your expectations of fast food.
+              Flavor explosions daily. Bold burgers, loaded fries, special blends — crafted to wreck
+              your expectations of fast food.
             </p>
             <div className="flex items-center gap-3 mt-6">
               {[Instagram, Facebook, Youtube, Twitter].map((I, i) => (
-                <a key={i} href="#" className="grid place-items-center w-10 h-10 rounded-full border border-white/15 hover:border-[#ff3b14] hover:bg-[#ff3b14]/10 hover:text-[#ff6a00] text-white transition">
+                <a
+                  key={i}
+                  href="#"
+                  className="grid place-items-center w-10 h-10 rounded-full border border-white/15 hover:border-[#ff3b14] hover:bg-[#ff3b14]/10 hover:text-[#ff6a00] text-white transition"
+                >
                   <I className="w-4 h-4" />
                 </a>
               ))}
             </div>
           </div>
           <div>
-            <div className="text-xs font-bold tracking-[0.22em] uppercase text-white/55 mb-4">Explore</div>
+            <div className="text-xs font-bold tracking-[0.22em] uppercase text-white/55 mb-4">
+              Explore
+            </div>
             <ul className="space-y-2.5">
               {NAV_ITEMS.map((n) => (
                 <li key={n.label}>
-                  <a href={n.href} className="text-sm text-white/75 hover:text-[#ff6a00] transition">{n.label}</a>
+                  <a
+                    href={n.href}
+                    className="text-sm text-white/75 hover:text-[#ff6a00] transition"
+                  >
+                    {n.label}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <div className="text-xs font-bold tracking-[0.22em] uppercase text-white/55 mb-4">Get In Touch</div>
+            <div className="text-xs font-bold tracking-[0.22em] uppercase text-white/55 mb-4">
+              Get In Touch
+            </div>
             <ul className="space-y-2.5 text-sm text-white/75">
               <li>42 Galle Road, Colombo 03</li>
               <li>+94 11 234 5678</li>
               <li>hello@torpedo.lk</li>
             </ul>
             <div className="mt-5 flex items-center gap-1 text-[#ff6a00] text-xs font-bold tracking-[0.2em] uppercase">
-              {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
-              <span className="ml-2 text-white/60 font-medium tracking-normal normal-case">4.9 on Google</span>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="w-3.5 h-3.5 fill-current" />
+              ))}
+              <span className="ml-2 text-white/60 font-medium tracking-normal normal-case">
+                4.9 on Google
+              </span>
             </div>
           </div>
         </div>
