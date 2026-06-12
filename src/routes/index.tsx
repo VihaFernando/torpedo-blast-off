@@ -242,12 +242,12 @@ function Hero() {
             </div>
 
             <div className="mt-8 sm:mt-10 flex flex-wrap gap-3 sm:gap-4">
-              <a
-                href="#menu"
+              <Link
+                to="/menu"
                 className="inline-flex items-center gap-2 sm:gap-2.5 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-5 py-2 sm:px-8 sm:py-3.5 rounded-md font-semibold tracking-wider text-xs sm:text-sm uppercase transition-all shadow-[0_0_20px_rgba(255,59,20,0.3)]"
               >
                 <Flame className="w-3 h-3 sm:w-4 sm:h-4 fill-current" /> VIEW MENU
-              </a>
+              </Link>
               <a
                 href="#contact"
                 className="inline-flex items-center gap-2 sm:gap-2.5 bg-black border border-white/30 hover:border-white text-white px-5 py-2 sm:px-8 sm:py-3.5 rounded-md font-semibold tracking-widest text-xs sm:text-sm uppercase transition-all"
