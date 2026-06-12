@@ -598,10 +598,10 @@ function SocialWall() {
   return (
     <section
       id="gallery"
-      className="relative py-24 md:py-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0a0606] to-black"
+      className="relative pt-8 pb-24 md:pb-32 px-5 lg:px-10 bg-linear-to-b from-black via-[#0a0606] to-black"
     >
       <div className="relative mx-auto max-w-7xl">
-        <SectionTitle kicker="@torpedo.lk" title="FROM THE FEED" />
+        <SectionTitle kicker="@torpedohq" title="FROM THE FEED" />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {GALLERY.map((img, i) => (
             <motion.a
