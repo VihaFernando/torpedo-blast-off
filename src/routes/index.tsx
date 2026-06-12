@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -48,12 +48,12 @@ export const Route = createFileRoute("/")({
 });
 
 const NAV_ITEMS = [
-  { label: "Home", href: "#home" },
-  { label: "Menu", href: "#menu" },
-  { label: "Special Blends", href: "#blends" },
-  { label: "Fire It Up", href: "#fire" },
-  { label: "Locations", href: "#contact" },
-  { label: "About Us", href: "#about" },
+  { label: "Home", href: "#home", to: undefined },
+  { label: "Menu", href: undefined, to: "/menu" as const },
+  { label: "Special Blends", href: "#blends", to: undefined },
+  { label: "Fire It Up", href: "#fire", to: undefined },
+  { label: "Locations", href: "#contact", to: undefined },
+  { label: "About Us", href: "#about", to: undefined },
 ];
 
 function Landing() {
@@ -61,10 +61,10 @@ function Landing() {
     <div id="home" className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
       <Navbar />
       <Hero />
-      <SignatureMenu />
+      {/* <SignatureMenu /> */}
       <FireItUp />
-      <SpecialBlends />
-      <AboutTimeline />
+      {/* <SpecialBlends /> 
+      <AboutTimeline /> */}
       <SocialWall />
       <LocationSection />
       <Footer />
@@ -98,23 +98,36 @@ function Navbar() {
           />
         </a>
         <nav className="hidden lg:flex items-center gap-9">
-          {NAV_ITEMS.slice(1).map((n) => (
-            <a
-              key={n.label}
-              href={n.href}
-              className="text-sm font-bold tracking-widest uppercase text-white hover:text-[#ff3b14] transition relative group"
-            >
-              {n.label}
-            </a>
-          ))}
+          {NAV_ITEMS.slice(1).map((n) => {
+            if (n.to) {
+              return (
+                <Link
+                  key={n.label}
+                  to={n.to}
+                  className="text-sm font-bold tracking-widest uppercase text-white hover:text-[#ff3b14] transition relative group"
+                >
+                  {n.label}
+                </Link>
+              );
+            }
+            return (
+              <a
+                key={n.label}
+                href={n.href!}
+                className="text-sm font-bold tracking-widest uppercase text-white hover:text-[#ff3b14] transition relative group"
+              >
+                {n.label}
+              </a>
+            );
+          })}
         </nav>
         <div className="flex items-center gap-3">
-          <a
-            href="#menu"
+          <Link
+            to="/menu"
             className="hidden sm:inline-flex items-center gap-2 rounded-md border border-[#ff3b14] px-6 py-2.5 text-sm font-bold tracking-[0.05em] uppercase text-white hover:bg-[#ff3b14] transition-all"
           >
-            Order Now <Flame className="w-4 h-4 text-[#ff3b14] group-hover:text-white" />
-          </a>
+            Order Now <Flame className="w-4 h-4 text-[#ff3b14]" />
+          </Link>
           <button
             onClick={() => setOpen((v) => !v)}
             className="lg:hidden grid place-items-center w-10 h-10 rounded-full glass-dark"
@@ -130,16 +143,30 @@ function Navbar() {
           animate={{ opacity: 1, y: 0 }}
           className="lg:hidden mt-3 mx-5 rounded-2xl glass-dark p-5 flex flex-col gap-3"
         >
-          {NAV_ITEMS.map((n) => (
-            <a
-              key={n.label}
-              href={n.href}
-              onClick={() => setOpen(false)}
-              className="text-sm font-semibold tracking-[0.18em] uppercase text-white/90 py-2 border-b border-white/5"
-            >
-              {n.label}
-            </a>
-          ))}
+          {NAV_ITEMS.map((n) => {
+            if (n.to) {
+              return (
+                <Link
+                  key={n.label}
+                  to={n.to}
+                  onClick={() => setOpen(false)}
+                  className="text-sm font-semibold tracking-[0.18em] uppercase text-white/90 py-2 border-b border-white/5"
+                >
+                  {n.label}
+                </Link>
+              );
+            }
+            return (
+              <a
+                key={n.label}
+                href={n.href!}
+                onClick={() => setOpen(false)}
+                className="text-sm font-semibold tracking-[0.18em] uppercase text-white/90 py-2 border-b border-white/5"
+              >
+                {n.label}
+              </a>
+            );
+          })}
         </motion.div>
       )}
     </header>
@@ -716,12 +743,21 @@ function Footer() {
             <ul className="space-y-2.5">
               {NAV_ITEMS.map((n) => (
                 <li key={n.label}>
-                  <a
-                    href={n.href}
-                    className="text-sm text-white/75 hover:text-[#ff6a00] transition"
-                  >
-                    {n.label}
-                  </a>
+                  {n.to ? (
+                    <Link
+                      to={n.to}
+                      className="text-sm text-white/75 hover:text-[#ff6a00] transition"
+                    >
+                      {n.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={n.href!}
+                      className="text-sm text-white/75 hover:text-[#ff6a00] transition"
+                    >
+                      {n.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
