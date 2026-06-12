@@ -207,14 +207,14 @@ function Hero() {
         style={{ opacity }}
         className="relative z-10 flex-1 flex items-center pt-24 pb-12 px-5 lg:px-10"
       >
-        <div className="mx-auto max-w-7xl w-full grid lg:grid-cols-2">
+        <div className="mx-auto max-w-7xl w-full grid lg:grid-cols-2 place-items-center lg:place-items-start">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="flex flex-col items-start"
+            className="flex flex-col items-center lg:items-start"
           >
-            <h1 className="font-display text-white leading-[0.88] tracking-normal uppercase">
+            <h1 className="font-display text-white leading-[0.88] tracking-normal uppercase text-center lg:text-left">
               <span className="block whitespace-nowrap text-[clamp(3rem,16vw,10rem)]">
                 ONE BITE
               </span>
@@ -223,11 +223,11 @@ function Hero() {
               </span>
             </h1>
 
-            <div className="mt-6 flex flex-col items-start gap-5">
+            <div className="mt-6 flex flex-col items-center lg:items-start gap-5">
               <img
                 src={flavorExplosionsImg}
                 alt="Flavor Explosions Daily"
-                className="h-14 sm:h-18 lg:h-25 w-auto object-contain"
+                className="h-14 sm:h-18 lg:h-25 w-auto object-contain lg:-translate-x-6"
               />
 
               <div className="flex items-center gap-3 sm:gap-5 text-sm sm:text-base font-semibold tracking-normal uppercase text-white">
@@ -241,7 +241,7 @@ function Hero() {
               </div>
             </div>
 
-            <div className="mt-8 sm:mt-10 flex flex-wrap gap-3 sm:gap-4">
+            <div className="mt-8 sm:mt-10 flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
               <Link
                 to="/menu"
                 className="inline-flex items-center gap-2 sm:gap-2.5 bg-[#ff3b14] hover:bg-[#ff5a2a] text-white px-5 py-2 sm:px-8 sm:py-3.5 rounded-md font-semibold tracking-wider text-xs sm:text-sm uppercase transition-all shadow-[0_0_20px_rgba(255,59,20,0.3)]"
